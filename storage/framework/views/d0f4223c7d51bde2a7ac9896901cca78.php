@@ -1,0 +1,1 @@
+<?php /**PATH C:\ironman\resources\views\layouts\main.blade.php ENDPATH**/ ?>
