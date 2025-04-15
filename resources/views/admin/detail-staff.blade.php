@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,8 +13,9 @@
             font-family: Arial, sans-serif;
             background-color: #f8f9fa;
         }
+
         .navbar {
-            background: linear-gradient(45deg,rgb(204, 0, 0),rgb(74, 0, 194));
+            background: linear-gradient(45deg, rgb(204, 0, 0), rgb(74, 0, 194));
             padding: 15px 20px;
             box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
         }
@@ -53,7 +55,8 @@
             text-decoration: none;
         }
 
-        .sidebar a:hover, .sidebar a.active {
+        .sidebar a:hover,
+        .sidebar a.active {
             background-color: #495057;
         }
 
@@ -63,12 +66,13 @@
         }
     </style>
 </head>
+
 <body>
     @if(auth()->user()->role !== 'admin')
     <script>
         window.location.href = "{{ url('/errors/404') }}";
     </script>
-@endif
+    @endif
     <div class="sidebar">
         <a href="/admin">Dashboard</a>
         <a href="{{ url('/admin/detail-staff') }}" class="active">Kelola Akun</a>
@@ -101,17 +105,17 @@
                 </thead>
                 <tbody>
                     @foreach($staffs as $staff)
-                        <tr>
-                            <td>{{ $staff->name }}</td>
-                            <td>{{ $staff->email }}</td>
-                            <td>
-                                <form action="{{ route('staff.destroy', $staff->id) }}" method="POST" style="display:inline;">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
-                                </form>
-                            </td>
-                        </tr>
+                    <tr>
+                        <td>{{ $staff->name }}</td>
+                        <td>{{ $staff->email }}</td>
+                        <td>
+                            <form action="{{ route('staff.destroy', $staff->id) }}" method="POST" style="display:inline;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
+                            </form>
+                        </td>
+                    </tr>
                     @endforeach
                 </tbody>
             </table>
@@ -129,7 +133,7 @@
                 <div class="modal-body">
                     <form action="{{ route('staff.store') }}" method="post" enctype="multipart/form-data">
                         @csrf
-                       
+
                         <div class="input-group mb-3">
                             <input type="text" class="form-control @error('name') is-invalid @enderror" placeholder="Name" id="name" name="name" required value="{{old('name')}}">
                         </div>
@@ -153,12 +157,14 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         @if(session('success'))
-            Swal.fire({
-                icon: 'success',
-                title: 'Berhasil',
-                text: '{{ session('success') }}',
-            });
+        Swal.fire({
+            icon: 'success',
+            title: 'Berhasil',
+            text: '{{ session('
+            success ') }}',
+        });
         @endif
     </script>
 </body>
+
 </html>

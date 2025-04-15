@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,8 +13,9 @@
             font-family: Arial, sans-serif;
             background-color: #f8f9fa;
         }
+
         .navbar {
-            background: linear-gradient(45deg,rgb(204, 0, 0),rgb(74, 0, 194));
+            background: linear-gradient(45deg, rgb(204, 0, 0), rgb(74, 0, 194));
             padding: 15px 20px;
             box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
         }
@@ -53,7 +55,8 @@
             text-decoration: none;
         }
 
-        .sidebar a:hover, .sidebar a.active {
+        .sidebar a:hover,
+        .sidebar a.active {
             background-color: #495057;
         }
 
@@ -63,12 +66,13 @@
         }
     </style>
 </head>
+
 <body>
     <?php if(auth()->user()->role !== 'admin'): ?>
     <script>
         window.location.href = "<?php echo e(url('/errors/404')); ?>";
     </script>
-<?php endif; ?>
+    <?php endif; ?>
     <div class="sidebar">
         <a href="/admin">Dashboard</a>
         <a href="<?php echo e(url('/admin/detail-staff')); ?>" class="active">Kelola Akun</a>
@@ -81,7 +85,7 @@
                     <h6>Selamat Datang, <?php echo e(auth()->user()->name); ?></h6>
                     <form id="logout-form" action="<?php echo e(route('logout')); ?>" method="POST" class="d-inline">
                         <?php echo csrf_field(); ?>
-                        <button type="submit" class="btn btn-danger"><i class="bi bi-box-arrow-right"></i></button>
+                        <button type="submit" class="btn btn-danger"><i class="bi bi-list"></i></button>
                     </form>
                 </div>
             </div>
@@ -101,17 +105,17 @@
                 </thead>
                 <tbody>
                     <?php $__currentLoopData = $staffs; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $staff): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                        <tr>
-                            <td><?php echo e($staff->name); ?></td>
-                            <td><?php echo e($staff->email); ?></td>
-                            <td>
-                                <form action="<?php echo e(route('staff.destroy', $staff->id)); ?>" method="POST" style="display:inline;">
-                                    <?php echo csrf_field(); ?>
-                                    <?php echo method_field('DELETE'); ?>
-                                    <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
-                                </form>
-                            </td>
-                        </tr>
+                    <tr>
+                        <td><?php echo e($staff->name); ?></td>
+                        <td><?php echo e($staff->email); ?></td>
+                        <td>
+                            <form action="<?php echo e(route('staff.destroy', $staff->id)); ?>" method="POST" style="display:inline;">
+                                <?php echo csrf_field(); ?>
+                                <?php echo method_field('DELETE'); ?>
+                                <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
+                            </form>
+                        </td>
+                    </tr>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 </tbody>
             </table>
@@ -129,7 +133,7 @@
                 <div class="modal-body">
                     <form action="<?php echo e(route('staff.store')); ?>" method="post" enctype="multipart/form-data">
                         <?php echo csrf_field(); ?>
-                       
+
                         <div class="input-group mb-3">
                             <input type="text" class="form-control <?php $__errorArgs = ['name'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -181,13 +185,14 @@ unset($__errorArgs, $__bag); ?>" placeholder="Password" id="password" name="pass
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         <?php if(session('success')): ?>
-            Swal.fire({
-                icon: 'success',
-                title: 'Berhasil',
-                text: '<?php echo e(session('success')); ?>',
-            });
+        Swal.fire({
+            icon: 'success',
+            title: 'Berhasil',
+            text: '<?php echo e(session('
+            success ')); ?>',
+        });
         <?php endif; ?>
     </script>
 </body>
-</html>
-<?php /**PATH C:\ironman\resources\views\admin\detail-staff.blade.php ENDPATH**/ ?>
+
+</html><?php /**PATH C:\ironman\resources\views\admin\detail-staff.blade.php ENDPATH**/ ?>

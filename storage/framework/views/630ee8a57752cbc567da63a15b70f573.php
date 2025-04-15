@@ -55,7 +55,7 @@
 <body>
     <nav class="navbar navbar-expand-lg">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">Pengaduan Masyarakat</a>
+            <a class="navbar-brand" href="/dashboard"><img src="/images/logo-tulisan.png" alt=""></a>
             <h6>Selamat Datang, <?php echo e(auth()->user()->name); ?></h6>
             <img src="<?php echo e(auth()->user()->image ? asset('storage/' . auth()->user()->image) : 'https://via.placeholder.com/400'); ?>" alt="Foto Profil">
             <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#laporanModal">Laporkan</button>

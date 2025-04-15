@@ -87,10 +87,75 @@
             <a class="navbar-brand" href="/dashboard">Pengaduan Masyarakat</a>
             <h6>Selamat Datang, {{ auth()->user()->name }}</h6>
             <img src="{{ auth()->user()->image ? asset('storage/' . auth()->user()->image) : 'https://via.placeholder.com/400' }}" alt="Foto Profil">
-            <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#laporanModal">Laporkan <i class="bi bi-flag"></i></button>
+            <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#laporanModal">Laporkan <i class="bi bi-flag"></i></button>
             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-inline ms-2"> <!-- Added ms-2 class for margin -->
                 @csrf
-                <button type="submit" class="btn btn-danger"><i class="bi bi-box-arrow-right"></i></button>
+                <!-- <button type="submit" class="btn btn-danger"><i class="bi bi-box-arrow-right"></i></button> -->
+                <div class="btn-group dropstart">
+                    <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-list"></i>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#userProfile">
+                                <i class="bi bi-person"></i> Profile
+                            </a>
+                        </li>
+                        <li>
+                            <form action="{{ route('logout') }}" method="POST">
+                                @csrf
+                                <button type="submit" class="dropdown-item">
+                                    <i class="bi bi-box-arrow-right"></i> Logout
+                                </button>
+                            </form>
+                        </li>
+                    </ul>
+
+                    <div class="modal fade" id="userProfile" tabindex="-1" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content" style="max-width: 400px; margin: auto;">
+                                <div class="modal-body text-center p-5">
+                                    <!-- Profile Photo Section -->
+                                    <div class="position-relative mx-auto" style="width: 120px; height: 120px;">
+                                        @if(auth()->user()->image)
+                                        <img src="{{ asset('storage/' . auth()->user()->image) }}"
+                                            class="rounded-circle img-thumbnail w-100 h-100"
+                                            style="object-fit: cover;">
+                                        @else
+                                        <div class="rounded-circle bg-secondary d-flex align-items-center justify-content-center w-100 h-100">
+                                            <i class="bi bi-person-fill text-white" style="font-size: 3rem;"></i>
+                                        </div>
+                                        @endif
+                                    </div>
+
+                                    <!-- User Info -->
+                                    <div class="mt-4">
+                                        <h5 class="mb-1">{{ auth()->user()->name }}</h5>
+                                        <p class="text-muted mb-3">{{ auth()->user()->email }}</p>
+                                        <p class="text-muted mb-3">{{ auth()->user()->no_hp }}</p>
+
+                                        <!-- Additional Info -->
+                                        <div class="d-flex justify-content-center gap-4">
+                                            <div>
+                                                <div class="fw-bold">Role</div>
+                                                <div class="text-muted small">{{ auth()->user()->role ?? 'Member' }}</div>
+                                            </div>
+                                            <div>
+                                                <div class="fw-bold">Joined</div>
+                                                <div class="text-muted small">{{ auth()->user()->created_at->format('d M Y') }}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer justify-content-center border-top-0">
+                                    <button type="button" class="btn btn-outline-dark px-4" data-bs-dismiss="modal">
+                                        Close
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </form>
         </div>
     </nav>
